@@ -18,6 +18,7 @@ const Weather = () => {
       );
       setWeather(response.data);
       updateBackground(response.data.weather[0].main);
+      setError("");
     } catch (error) {
       setError("City not found. Try again.");
       setWeather(null);
@@ -27,13 +28,13 @@ const Weather = () => {
 
   // Fetch Weather on Load
   useEffect(() => {
-    fetchWeather();
+   if (city) fetchWeather(city);
   }, []);
 
   // Change Background Image Dynamically
   const updateBackground = (condition) => {
     const backgrounds = {
-      Clear: "/images/clear.webp",
+      Clear: "/images/clear.jpeg",
       Clouds: "/images/cloudy.jpeg",
       Rain: "/images/rain.jpeg",
       Snow: "/images/snow.jpeg",
